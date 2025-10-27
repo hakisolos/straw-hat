@@ -302,7 +302,7 @@ atomic-sleep@^1.0.0:
   resolved "https://registry.npmjs.org/atomic-sleep/-/atomic-sleep-1.0.0.tgz"
   integrity sha512-kNOjDqAh7px0XWNI+4QbzoiR/nTkHAWNud2uvnJquD1/x5a7EQZMJT0AczqK0Qn67oY/TTQ1LbUKajZpp3I9tQ==
 
-axios@^1.13.0, axios@^1.6.0:
+axios@^1.13.0:
   version "1.13.0"
   resolved "https://registry.npmjs.org/axios/-/axios-1.13.0.tgz"
   integrity sha512-zt40Pz4zcRXra9CVV31KeyofwiNvAbJ5B6YPz9pMJ+yOSLikvPT4Yi5LjfgjRa9CawVYBaD1JQzIVcIvBejKeA==
@@ -311,17 +311,18 @@ axios@^1.13.0, axios@^1.6.0:
     form-data "^4.0.4"
     proxy-from-env "^1.1.0"
 
-baileys@6.7.19:
-  version "6.7.19"
-  resolved "https://registry.yarnpkg.com/baileys/-/baileys-6.7.19.tgz#7f278ed4c41b0c98e95766e7ebca5881cc539b16"
-  integrity sha512-15ZZVZoN5CQl6UeTT+3CogIZm40G+E5LO9meVi4NhqxmYYiIGoh7iuq5UlHjmTvZIpFtMPCnz+EDmyEABy8oig==
+baileys@^7.0.0-rc.6:
+  version "7.0.0-rc.6"
+  resolved "https://registry.yarnpkg.com/baileys/-/baileys-7.0.0-rc.6.tgz#4410c5089b525242365a5665f2a55dd4a0e23c2f"
+  integrity sha512-Unt58dy39rFQ3dRgTUxT38/AXWInNLYx9zijU7PpHDeoNdJfvgyROnHLtmh9hAglLKA1t374v1JLnfI5Tk/TSQ==
   dependencies:
     "@cacheable/node-cache" "^1.4.0"
     "@hapi/boom" "^9.1.3"
     async-mutex "^0.5.0"
-    axios "^1.6.0"
     libsignal "git+https://github.com/whiskeysockets/libsignal-node"
+    lru-cache "^11.1.0"
     music-metadata "^11.7.0"
+    p-queue "^9.0.0"
     pino "^9.6"
     protobufjs "^7.2.4"
     ws "^8.13.0"
@@ -475,6 +476,11 @@ es-set-tostringtag@^2.1.0:
     get-intrinsic "^1.2.6"
     has-tostringtag "^1.0.2"
     hasown "^2.0.2"
+
+eventemitter3@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-5.0.1.tgz#53f5ffd0a492ac800721bb42c66b841de96423c4"
+  integrity sha512-GWkBvjiSZK87ELrYOSESUYeVIc9mvLLf/nXalMOS5dYrgZq9o5OVkbZAVM06CVxYsCwH9BDZFPlQTlPA1j4ahA==
 
 fflate@^0.8.2:
   version "0.8.2"
@@ -652,6 +658,11 @@ long@^5.0.0:
   resolved "https://registry.npmjs.org/long/-/long-5.3.2.tgz"
   integrity sha512-mNAgZ1GmyNhD7AuqnTG3/VQ26o760+ZYBPKjPvugO8+nLbYfX6TVpJPseBvopbdY+qpZ/lKUnmEc1LeZYS3QAA==
 
+lru-cache@^11.1.0:
+  version "11.2.2"
+  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-11.2.2.tgz#40fd37edffcfae4b2940379c0722dc6eeaa75f24"
+  integrity sha512-F9ODfyqML2coTIsQpSkRHnLSZMtkU8Q+mSfcaIyKwy58u+8k5nvAYeiNhsyMARvzNcXJ9QfWVrcPsC9e9rAxtg==
+
 make-error@^1.1.1:
   version "1.3.6"
   resolved "https://registry.npmjs.org/make-error/-/make-error-1.3.6.tgz"
@@ -738,6 +749,19 @@ on-exit-leak-free@^2.1.0:
   version "2.1.2"
   resolved "https://registry.npmjs.org/on-exit-leak-free/-/on-exit-leak-free-2.1.2.tgz"
   integrity sha512-0eJJY6hXLGf1udHwfNftBqH+g73EU4B504nZeKpz1sYRKafAghwxEJunB2O7rDZkL4PGfsMVnTXZ2EjibbqcsA==
+
+p-queue@^9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/p-queue/-/p-queue-9.0.0.tgz#c571d6fd46ae8e79a39c842935e92d352f7701ec"
+  integrity sha512-KO1RyxstL9g1mK76530TExamZC/S2Glm080Nx8PE5sTd7nlduDQsAfEl4uXX+qZjLiwvDauvzXavufy3+rJ9zQ==
+  dependencies:
+    eventemitter3 "^5.0.1"
+    p-timeout "^7.0.0"
+
+p-timeout@^7.0.0:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/p-timeout/-/p-timeout-7.0.1.tgz#95680a6aa693c530f14ac337b8bd32d4ec6ae4f0"
+  integrity sha512-AxTM2wDGORHGEkPCt8yqxOTMgpfbEHqF51f/5fJCmwFC3C/zNcGT63SymH2ttOAaiIws2zVg4+izQCjrakcwHg==
 
 picomatch@^2.0.4, picomatch@^2.2.1:
   version "2.3.1"

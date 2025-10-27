@@ -21,16 +21,19 @@ export const commands: Command[] = [];
 const prefix: string = config.PREFIX;
 
 export function loadCommands(): void {
-    const pluginsDir = path.join(process.cwd(), "plugins");
+    const pluginsDir = path.join(process.cwd(), "./src/plugins");
     if (!fs.existsSync(pluginsDir)) return;
 
-    const files = fs.readdirSync(pluginsDir).filter(f => f.endsWith(".js"));
-    for (const file of files) {
+    const files = fs.readdirSync(pluginsDir).filter(f => f.endsWith(".js") || f.endsWith(".ts"));
+     for (const file of files) {
         const pluginPath = path.join(pluginsDir, file);
-        const pluginUrl = "file://" + pluginPath.replace(/\\/g, "/");
-        import(pluginUrl).catch(err => {
+
+        try {
+            require(pluginPath);
+            //console.log(`Loaded plugin: ${file}`);
+        } catch (err) {
             console.error(`Failed to load plugin ${file}:`, err);
-        });
+        }
     }
 }
 

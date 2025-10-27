@@ -7,7 +7,7 @@ import config from "../config";
 export function MessageHandler(sock: WASocket) {
     sock.ev.on("messages.upsert", async ({ messages }) => {
         const m = messages[0]
-        if (m.message) return
+        if (!m.message) return
 
         const msg = new SerializedMessage(m, sock)
         var moderators = config.MODS
@@ -36,7 +36,7 @@ export function logger(sock: WASocket) {
     sock.ev.on('messages.upsert', async ({ messages }) => {
         const m = messages[0]
         if (!m.message) return
-
+        const msg = new SerializedMessage(m, sock)
         const msgId = m.key.id
         const chatJid = m.key.remoteJid
         const senderJid = m.key.participant || m.key.remoteJid
@@ -51,7 +51,8 @@ export function logger(sock: WASocket) {
             `Chat JID     : ${chatJid}\n` +
             `Sender JID   : ${senderJid}\n` +
             `Type         : ${type}\n` +
-            `Content      : ${content}\n`
+            `Content      : ${content}\n` +
+            `fromMe:      : ${msg.fromMe}`
         )
     })
 }

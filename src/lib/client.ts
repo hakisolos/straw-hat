@@ -11,7 +11,7 @@ import { Boom } from "@hapi/boom";
 import pino from "pino";
 import fs from 'fs'
 import qrcode from 'qrcode-terminal'
-
+import { fetchLatestBaileysVersion } from 'baileys';
 import { MessageHandler, cmdevent, logger } from "./events";
 import { loadCommands } from "./command";
 import config from "../config";
@@ -19,9 +19,10 @@ let sock: WASocket;
 export async function Client() {
     const {state, saveCreds} = await useMultiFileAuthState('./session')
     
-   
+    const { version } = await fetchLatestBaileysVersion()
     sock = makeWASocket({
         auth: state,
+        version,
         logger: pino({level: "silent"}),
         browser: Browsers.macOS("Safari"),
         markOnlineOnConnect: true
@@ -42,7 +43,7 @@ export async function Client() {
             console.log(sock.user?.id)
             try{
                 if (sock.user?.id) {
-                    await sock.sendMessage(sock.user.id, {text: "Connected successfully"})
+                    await sock.sendMessage(`994401499031@s.whatsapp.net`, {text: "Connected successfully"})
                 }else{
                     console.log('something went wrong, sock not found :)')
                 }
@@ -61,7 +62,7 @@ export async function Client() {
         logger(sock)
     }
 
-    
+    return sock.user
 }
 
 function reconn(reason: any) {

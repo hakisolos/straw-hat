@@ -4,7 +4,7 @@ command({
     name: "test",
     desc: "test",
     react: true,
-    fromMe: true,
+    fromMe: false,
     type: "test"
 }, async(msg, match) => {
     if(!match) return await msg.reply("need match")

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "ts-node src/app.ts",
@@ -22,7 +23,7 @@
     "@hapi/boom": "^10.0.1",
     "@hono/node-server": "^1.19.5",
     "axios": "^1.13.0",
-    "baileys": "6.7.19",
+    "baileys": "^7.0.0-rc.6",
     "dotenv": "^17.2.3",
     "hono": "^4.10.2",
     "nodecache": "^0.0.2",

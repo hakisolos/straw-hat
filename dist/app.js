@@ -6,10 +6,10 @@ const dotenv_1 = require("dotenv");
 const client_1 = require("./lib/client");
 (0, dotenv_1.config)();
 const app = new hono_1.Hono();
+const user = (0, client_1.Client)();
 app.get("/", (c) => {
-    return c.text("Hello via flare");
+    return c.json(user);
 });
 (0, node_server_1.serve)(app, (info) => {
-    (0, client_1.Client)();
     console.log(`server running on http://localhost:${info.port}`);
 });

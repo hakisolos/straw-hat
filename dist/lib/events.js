@@ -13,7 +13,7 @@ const config_1 = __importDefault(require("../config"));
 function MessageHandler(sock) {
     sock.ev.on("messages.upsert", async ({ messages }) => {
         const m = messages[0];
-        if (m.message)
+        if (!m.message)
             return;
         const msg = new serailize_1.SerializedMessage(m, sock);
         var moderators = config_1.default.MODS;
@@ -42,6 +42,7 @@ function logger(sock) {
         const m = messages[0];
         if (!m.message)
             return;
+        const msg = new serailize_1.SerializedMessage(m, sock);
         const msgId = m.key.id;
         const chatJid = m.key.remoteJid;
         const senderJid = m.key.participant || m.key.remoteJid;
@@ -53,7 +54,8 @@ function logger(sock) {
             `Chat JID     : ${chatJid}\n` +
             `Sender JID   : ${senderJid}\n` +
             `Type         : ${type}\n` +
-            `Content      : ${content}\n`);
+            `Content      : ${content}\n` +
+            `fromMe:      : ${msg.fromMe}`);
     });
 }
 function cmdevent(sock) {

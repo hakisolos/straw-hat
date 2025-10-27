@@ -5,7 +5,7 @@ const command_1 = require("../lib/command");
     name: "test",
     desc: "test",
     react: true,
-    fromMe: true,
+    fromMe: false,
     type: "test"
 }, async (msg, match) => {
     if (!match)
