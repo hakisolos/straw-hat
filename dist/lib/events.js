@@ -6,10 +6,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.MessageHandler = MessageHandler;
 exports.logger = logger;
 exports.cmdevent = cmdevent;
+exports.Nikka = Nikka;
 const serailize_1 = require("./serailize");
 const command_1 = require("./command");
 const util_1 = __importDefault(require("util"));
 const config_1 = __importDefault(require("../config"));
+const textModule_1 = require("../core/textModule");
 function MessageHandler(sock) {
     sock.ev.on("messages.upsert", async ({ messages }) => {
         const m = messages[0];
@@ -67,5 +69,16 @@ function cmdevent(sock) {
         if (!msg || !msg.body)
             return;
         await (0, command_1.commandHandler)(msg);
+    });
+}
+function Nikka(sock) {
+    sock.ev.on("messages.upsert", async ({ messages }) => {
+        const m = messages[0];
+        if (!m.message)
+            return;
+        const msg = new serailize_1.SerializedMessage(m, sock);
+        if (msg.isGroup) {
+            const res = await (0, textModule_1.nikkaTextModule)(msg.content, msg.sender);
+        }
     });
 }
