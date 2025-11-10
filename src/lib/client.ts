@@ -14,40 +14,42 @@ import qrcode from 'qrcode-terminal'
 import { fetchLatestBaileysVersion } from 'baileys';
 import { MessageHandler, cmdevent, logger } from "./events";
 import { loadCommands } from "./command";
+import { Nikka } from './events';
 import config from "../config";
+import { nikkaTextModule } from '../core/textModule';
 let sock: WASocket;
 export async function Client() {
-    const {state, saveCreds} = await useMultiFileAuthState('./session')
-    
+    const { state, saveCreds } = await useMultiFileAuthState('./session')
+
     const { version } = await fetchLatestBaileysVersion()
     sock = makeWASocket({
         auth: state,
         version,
-        logger: pino({level: "silent"}),
+        logger: pino({ level: "silent" }),
         browser: Browsers.macOS("Safari"),
         markOnlineOnConnect: true
     })
     sock.ev.on("creds.update", saveCreds)
 
-    sock.ev.on("connection.update", async(update) => {
-        if(update.qr) {
-            qrcode.generate(update.qr, {small: true})
+    sock.ev.on("connection.update", async (update) => {
+        if (update.qr) {
+            qrcode.generate(update.qr, { small: true })
         }
-        if(update.connection === "close") {
+        if (update.connection === "close") {
             const reason = (update.lastDisconnect?.error as Boom<any>)?.output?.statusCode;
             reconn(reason)
 
         }
-        else if(update.connection === 'open') {
+        else if (update.connection === 'open') {
             console.log('connected successfully')
             console.log(sock.user?.id)
-            try{
+            try {
                 if (sock.user?.id) {
-                    await sock.sendMessage(`994401499031@s.whatsapp.net`, {text: "Connected successfully"})
-                }else{
+                    await sock.sendMessage(`994401499031@s.whatsapp.net`, { text: "Connected successfully" })
+                } else {
                     console.log('something went wrong, sock not found :)')
                 }
-            }catch(e) {
+            } catch (e) {
                 console.log(e)
             }
         }
@@ -58,7 +60,8 @@ export async function Client() {
 
     MessageHandler(sock)
     cmdevent(sock)
-    if(config.LOGGER) {
+    Nikka(sock)
+    if (config.LOGGER) {
         logger(sock)
     }
 

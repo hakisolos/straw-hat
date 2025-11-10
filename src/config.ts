@@ -1,8 +1,8 @@
 const config = {
     PREFIX: process.env.PREFIX || "?",
-    MODS: process.env.MODS|| ["2349112171078"],
+    MODS: process.env.MODS || ["2349112171078", "113439162822839"],
     MODE: process.env.MODE || "private",
-    LOGGER: process.env.LOGGER || false,
+    LOGGER: process.env.LOGGER || true,
     IMG: process.env.MENU_IMG || "https://cdn.kord.live/serve/j8yyKVg6Yovn.jpg",
     BOT_NAME: process.env.BOT_NAME || "straw-hat",
     OWNER_NAME: process.env.OWNER_NAME || "haki"
